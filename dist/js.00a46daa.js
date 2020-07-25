@@ -181,6 +181,10 @@ var Select = /*#__PURE__*/function () {
     value: function select(id) {
       this.selectedId = id;
       this.$value.textContent = this.current.value;
+      this.$el.querySelectorAll('[data-type="item"]').forEach(function (el) {
+        el.classList.remove('selected');
+      });
+      this.$el.querySelector("[data-id=\"".concat(id, "\"]")).classList.add('selected');
       this.close();
     }
   }, {
