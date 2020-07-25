@@ -19,6 +19,7 @@ body {
 .select {
   width: 100%;
   position: relative;
+  z-index: 100;
 }
 
 .select.open .select__dropdown {
@@ -27,6 +28,10 @@ body {
 
 .select.open .select__input {
   border-bottom: none;
+}
+
+.select.open .select__backdrop {
+  display: block;
 }
 
 .select__input {
@@ -80,6 +85,17 @@ body {
   cursor: pointer;
   -webkit-transition: .15s background-color ease-in;
   transition: .15s background-color ease-in;
+}
+
+.select__backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: -1;
 }
 
 
