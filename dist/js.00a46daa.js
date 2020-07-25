@@ -140,7 +140,7 @@ var getTemplate = function getTemplate() {
   var items = data.map(function (item) {
     return "\n            <li class=\"select__item\" data-type=\"item\" data-id=\"".concat(item.id, "\">").concat(item.value, "</li>\n        ");
   });
-  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n            </ul>\n        </div>\n    ");
+  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span data-type=\"value\">".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n            </ul>\n        </div>\n    ");
 };
 
 var _render = new WeakSet();
@@ -157,6 +157,7 @@ var Select = /*#__PURE__*/function () {
 
     this.$el = document.querySelector(selector);
     this.options = options;
+    this.selectedId = null;
 
     _classPrivateMethodGet(this, _render, _render2).call(this);
 
@@ -172,8 +173,15 @@ var Select = /*#__PURE__*/function () {
         this.toggle();
       } else if (type === 'item') {
         var id = event.target.dataset.id;
-        console.log('id:', id);
+        this.select(id);
       }
+    }
+  }, {
+    key: "select",
+    value: function select(id) {
+      this.selectedId = id;
+      this.$value.textContent = this.current.value;
+      this.close();
     }
   }, {
     key: "toggle",
@@ -208,6 +216,15 @@ var Select = /*#__PURE__*/function () {
     get: function get() {
       return this.$el.classList.contains('open');
     }
+  }, {
+    key: "current",
+    get: function get() {
+      var _this2 = this;
+
+      return this.options.data.find(function (item) {
+        return item.id === _this2.selectedId;
+      });
+    }
   }]);
 
   return Select;
@@ -224,13 +241,14 @@ var _render2 = function _render2() {
 };
 
 var _setup2 = function _setup2() {
-  var _this2 = this;
+  var _this3 = this;
 
   this.clickHandler = this.clickHandler.bind(this);
   this.$el.addEventListener('click', function (event) {
-    return _this2.clickHandler(event);
+    return _this3.clickHandler(event);
   });
   this.$arrow = this.$el.querySelector('[data-type="arrow"]');
+  this.$value = this.$el.querySelector('[data-type="value"]');
 };
 },{}],"js/index.js":[function(require,module,exports) {
 "use strict";

@@ -9,7 +9,7 @@ const getTemplate = (data = [], placeholder) => {
 
     return `
         <div class="select__input" data-type="input">
-            <span>${text}</span>
+            <span data-type="value">${text}</span>
             <i class="fa fa-chevron-down" data-type="arrow"></i>
         </div>
         <div class="select__dropdown">
@@ -24,6 +24,7 @@ export class Select {
     constructor(selector, options) {
         this.$el = document.querySelector(selector);
         this.options = options;
+        this.selectedId = null;
 
         this.#render();
         this.#setup();
@@ -40,6 +41,7 @@ export class Select {
 
         this.$el.addEventListener('click', event => this.clickHandler(event));
         this.$arrow = this.$el.querySelector('[data-type="arrow"]');
+        this.$value = this.$el.querySelector('[data-type="value"]');
     }
     
     clickHandler(event) {
@@ -49,12 +51,22 @@ export class Select {
             this.toggle();
         } else if (type === 'item') {
             const id = event.target.dataset.id;
-            console.log('id:', id);
+            this.select(id);
         }
     }
 
     get isOpen() {
         return this.$el.classList.contains('open');
+    }
+
+    get current() {
+        return this.options.data.find(item => item.id === this.selectedId)
+    }
+
+    select(id) {
+        this.selectedId = id;
+        this.$value.textContent = this.current.value;
+        this.close();
     }
 
     toggle() {
