@@ -228,7 +228,29 @@ var _setup2 = function _setup2() {
 var _select = require("./select");
 
 var select = new _select.Select('#select', {
-  placeholder: 'Выбери элемент'
+  placeholder: 'Выбери элемент',
+  data: [{
+    id: '1',
+    value: 'React'
+  }, {
+    id: '2',
+    value: 'Angular'
+  }, {
+    id: '3',
+    value: 'Vue'
+  }, {
+    id: '4',
+    value: 'React Native'
+  }, {
+    id: '5',
+    value: 'Next'
+  }, {
+    id: '6',
+    value: 'Nest'
+  }, {
+    id: '7',
+    value: 'Flutter'
+  }]
 });
 window.s = select;
 },{"./select":"js/select.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
