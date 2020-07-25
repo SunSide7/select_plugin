@@ -195,6 +195,7 @@ var Select = /*#__PURE__*/function () {
         el.classList.remove('selected');
       });
       this.$el.querySelector("[data-id=\"".concat(id, "\"]")).classList.add('selected');
+      this.options.onSelect && this.options.onSelect(this.current);
       this.close();
     }
   }, {
@@ -294,7 +295,10 @@ var select = new _select.Select('#select', {
   }, {
     id: '7',
     value: 'Flutter'
-  }]
+  }],
+  onSelect: function onSelect(item) {
+    console.log('Selected Item:', item);
+  }
 });
 window.s = select;
 },{"./select":"js/select.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

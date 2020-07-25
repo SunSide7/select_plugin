@@ -11,7 +11,10 @@ const select = new Select('#select', {
         {id: '5', value: 'Next'},
         {id: '6', value: 'Nest'},
         {id: '7', value: 'Flutter'},
-    ]
+    ],
+    onSelect(item) {
+        console.log('Selected Item:', item);
+    }
 })
 
 window.s = select;
