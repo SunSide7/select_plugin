@@ -133,9 +133,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
-var getTemplate = function getTemplate(placeholder) {
+var getTemplate = function getTemplate() {
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var placeholder = arguments.length > 1 ? arguments[1] : undefined;
   var text = placeholder || 'Placeholder по умолчанию';
-  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n            </ul>\n        </div>\n    ");
+  var items = data.map(function (item) {
+    return "\n            <li class=\"select__item\">".concat(item.value, "</li>\n        ");
+  });
+  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n            </ul>\n        </div>\n    ");
 };
 
 var _render = new WeakSet();
@@ -208,9 +213,11 @@ var Select = /*#__PURE__*/function () {
 exports.Select = Select;
 
 var _render2 = function _render2() {
-  var placeholder = this.options.placeholder;
+  var _this$options = this.options,
+      placeholder = _this$options.placeholder,
+      data = _this$options.data;
   this.$el.classList.add('select');
-  this.$el.innerHTML = getTemplate(placeholder);
+  this.$el.innerHTML = getTemplate(data, placeholder);
 };
 
 var _setup2 = function _setup2() {
