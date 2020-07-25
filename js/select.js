@@ -1,6 +1,6 @@
 const getTemplate = () => {
     return `
-        <div class="select__input">
+        <div class="select__input" data-type="input">
             <span>Text</span>
             <i class="fa fa-chevron-down"></i>
         </div>
@@ -34,11 +34,23 @@ export class Select {
     #setup() {
         this.clickHandler = this.clickHandler.bind(this);
 
-        this.$el.addEventListener('click', event => this.clickHandler(event))
+        this.$el.addEventListener('click', event => this.clickHandler(event));
     }
     
     clickHandler(event) {
-        console.log(event)
+        const {type} = event.target.dataset;
+
+        if (type === 'input') {
+            this.toggle();
+        }
+    }
+
+    get isOpen() {
+        return this.$el.classList.contains('open');
+    }
+
+    toggle() {
+        this.isOpen ? this.close() : this.open()
     }
     
     open() {
