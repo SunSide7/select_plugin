@@ -138,7 +138,7 @@ var getTemplate = function getTemplate() {
   var placeholder = arguments.length > 1 ? arguments[1] : undefined;
   var text = placeholder || 'Placeholder по умолчанию';
   var items = data.map(function (item) {
-    return "\n            <li class=\"select__item\">".concat(item.value, "</li>\n        ");
+    return "\n            <li class=\"select__item\" data-type=\"item\" data-id=\"".concat(item.id, "\">").concat(item.value, "</li>\n        ");
   });
   return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n            </ul>\n        </div>\n    ");
 };
@@ -170,6 +170,9 @@ var Select = /*#__PURE__*/function () {
 
       if (type === 'input') {
         this.toggle();
+      } else if (type === 'item') {
+        var id = event.target.dataset.id;
+        console.log('id:', id);
       }
     }
   }, {
@@ -288,7 +291,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53138" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53421" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

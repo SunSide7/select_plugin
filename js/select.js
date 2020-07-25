@@ -3,7 +3,7 @@ const getTemplate = (data = [], placeholder) => {
 
     const items = data.map(item => {
         return `
-            <li class="select__item">${item.value}</li>
+            <li class="select__item" data-type="item" data-id="${item.id}">${item.value}</li>
         `;
     })
 
@@ -47,6 +47,9 @@ export class Select {
 
         if (type === 'input') {
             this.toggle();
+        } else if (type === 'item') {
+            const id = event.target.dataset.id;
+            console.log('id:', id);
         }
     }
 
