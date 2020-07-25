@@ -222,6 +222,7 @@ var Select = /*#__PURE__*/function () {
       this.$el.removeEventListener('click', function () {
         return _this.clickHandler;
       });
+      this.$el.innerHTML = '';
     }
   }, {
     key: "isOpen",
