@@ -134,7 +134,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
 var getTemplate = function getTemplate() {
-  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>Text</span>\n            <i class=\"fa fa-chevron-down\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n            </ul>\n        </div>\n    ";
+  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>Text</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n                <li class=\"select__item\">12345</li>\n            </ul>\n        </div>\n    ";
 };
 
 var _render = new WeakSet();
@@ -173,11 +173,15 @@ var Select = /*#__PURE__*/function () {
   }, {
     key: "open",
     value: function open() {
+      this.$arrow.classList.remove('fa-chevron-down');
+      this.$arrow.classList.add('fa-chevron-up');
       this.$el.classList.add('open');
     }
   }, {
     key: "close",
     value: function close() {
+      this.$arrow.classList.add('fa-chevron-down');
+      this.$arrow.classList.remove('fa-chevron-up');
       this.$el.classList.remove('open');
     }
   }, {
@@ -213,6 +217,7 @@ var _setup2 = function _setup2() {
   this.$el.addEventListener('click', function (event) {
     return _this2.clickHandler(event);
   });
+  this.$arrow = this.$el.querySelector('[data-type="arrow"]');
 };
 },{}],"js/index.js":[function(require,module,exports) {
 "use strict";
@@ -249,7 +254,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52654" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52845" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
